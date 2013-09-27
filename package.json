@@ -1,0 +1,24 @@
+{
+  "name": "obj-merge",
+  "version": "0.0.0",
+  "description": "non-destructive extend",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jarofghosts/obj-merge.git"
+  },
+  "keywords": [
+    "object",
+    "extend",
+    "merge",
+    "utility"
+  ],
+  "author": "jesse keane",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jarofghosts/obj-merge/issues"
+  }
+}
