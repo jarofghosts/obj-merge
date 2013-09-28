@@ -1,6 +1,8 @@
 obj-merge
 ====
 
+[![Build Status](https://travis-ci.org/jarofghosts/obj-merge.png?branch=master)](https://travis-ci.org/jarofghosts/obj-merge)
+
 accumulate some object properties
 
 ## usage
@@ -18,6 +20,7 @@ console.dir(objm(cliOptions, configOptions, misc))
     cat: 'Black Cat' }
 */
 ```
+throw any number of objects at it (even 0) and it will return an object with all of their top-level keys combined.
 
 ## license
 
