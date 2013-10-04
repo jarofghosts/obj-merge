@@ -7,9 +7,9 @@ function merge() {
   if (l == 1) return objs[0]
   var result = {},
       keys = []
-  for (var i = 0; i < l; ++i) {
-    keys = keys.concat(Object.keys(objs[i]))
-  }
+  objs.map(function (o) {
+    keys = keys.concat(Object.keys(o))
+  })
   keys = keys.filter(function (k, idx, arr) { return arr.lastIndexOf(k) === idx })
   for (var k = 0, f = keys.length; k < f; ++k) {
     var keyResult = [],
@@ -17,7 +17,7 @@ function merge() {
         convert = false
     objs.map(function (el) {
       if (el.hasOwnProperty(attr)) {
-        if (el[attr] instanceof Array) {
+        if (Array.isArray(el[attr])) {
           keyResult = keyResult.concat(el[attr])
           return convert = true
         }
