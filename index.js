@@ -2,37 +2,47 @@ module.exports = merge
 
 function merge() {
   var objs = [].slice.call(arguments),
+      i = 0,
       l = objs.length
 
   if (!l) return {}
   if (l === 1) return objs[0]
 
   var result = {},
-      keys = []
+      keys = [],
+      key_result,
+      convert,
+      attr,
+      el
 
-  for (var i = 0; i < l; ++i) {
+  for (; i < l; ++i) {
     keys = keys.concat(Object.keys(objs[i]))
   }
 
-  keys = keys.filter(function (k, idx, arr) {
-    return arr.lastIndexOf(k) === idx
-  })
+  for (i = 0, l = keys.length; i < l; ++i) {
+    if (keys.lastIndexOf(keys[i]) !== i) {
+      keys.splice(i, -1)
+    }
+  }
 
-  for (var k = 0, f = keys.length; k < f; ++k) {
-    var keyResult = [],
-        attr = keys[k],
-        convert = false
+  for (i = 0, l = keys.length; i < l; ++i) {
+    key_result = []
+    attr = keys[i]
+    convert = false
 
-    objs.map(function (el) {
-      if (!el.hasOwnProperty(attr)) return
-      if (!Array.isArray(el[attr])) return keyResult.push(el[attr])
+    for (var j = 0, k = objs.length; j < k; ++j) {
+      el = objs[j]
+      if (!el.hasOwnProperty(attr)) continue
+      if (!Array.isArray(el[attr])) {
+        key_result.push(el[attr])
+      } else {
+        key_result = key_result.concat(el[attr])
+        convert = true
+      }
+    }
 
-      keyResult = keyResult.concat(el[attr])
-      convert = true
-    })
-
-    if (keyResult.length === 1 && !convert) keyResult = keyResult[0]
-    result[attr] = keyResult
+    if (key_result.length === 1 && !convert) key_result = key_result[0]
+    result[attr] = key_result
   }
 
   return result
