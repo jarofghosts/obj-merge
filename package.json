@@ -1,6 +1,6 @@
 {
   "name": "obj-merge",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "non-destructive extend",
   "main": "index.js",
   "scripts": {
