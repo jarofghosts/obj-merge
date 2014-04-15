@@ -1,19 +1,20 @@
 module.exports = merge
 
 function merge() {
-  var objs = [].slice.call(arguments),
-      i = 0,
-      l = objs.length
+  var objs = [].slice.call(arguments)
+    , l = objs.length
+    , i = 0
 
   if (!l) return {}
   if (l === 1) return objs[0]
 
-  var result = {},
-      keys = [],
-      key_result,
-      convert,
-      attr,
-      el
+  var result = {}
+    , keys = []
+
+  var key_result
+    , convert
+    , attr
+    , el
 
   for (; i < l; ++i) {
     keys = keys.concat(Object.keys(objs[i]))
