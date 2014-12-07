@@ -11,7 +11,7 @@ function merge() {
   var result = {}
     , keys = []
 
-  var key_result
+  var keyResult
     , convert
     , attr
     , el
@@ -27,7 +27,7 @@ function merge() {
   }
 
   for(i = 0, l = keys.length; i < l; ++i) {
-    key_result = []
+    keyResult = []
     attr = keys[i]
     convert = false
 
@@ -35,15 +35,15 @@ function merge() {
       el = objs[j]
       if(!el.hasOwnProperty(attr)) continue
       if(!Array.isArray(el[attr])) {
-        key_result.push(el[attr])
+        keyResult.push(el[attr])
       } else {
-        key_result = key_result.concat(el[attr])
+        keyResult = keyResult.concat(el[attr])
         convert = true
       }
     }
 
-    if(key_result.length === 1 && !convert) key_result = key_result[0]
-    result[attr] = key_result
+    if(keyResult.length === 1 && !convert) keyResult = keyResult[0]
+    result[attr] = keyResult
   }
 
   return result
