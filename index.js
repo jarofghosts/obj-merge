@@ -2,49 +2,26 @@ module.exports = merge
 
 function merge() {
   var objs = [].slice.call(arguments)
-    , l = objs.length
-    , i = 0
+    , len = objs.length
 
-  if(!l) return {}
-  if(l === 1) return objs[0]
+  if(!len) return {}
+  if(len === 1) return objs.shift()
 
-  var result = {}
-    , keys = []
+  return objs.reduce(mergeObjects)
 
-  var keyResult
-    , convert
-    , attr
-    , el
+  function mergeObjects(curr, next) {
+    var keys = Object.keys(curr)
+      , key
 
-  for(; i < l; ++i) {
-    keys = keys.concat(Object.keys(objs[i]))
-  }
-
-  for(i = 0, l = keys.length; i < l; ++i) {
-    if(keys.lastIndexOf(keys[i]) !== i) {
-      keys.splice(i, -1)
-    }
-  }
-
-  for(i = 0, l = keys.length; i < l; ++i) {
-    keyResult = []
-    attr = keys[i]
-    convert = false
-
-    for(var j = 0, k = objs.length; j < k; ++j) {
-      el = objs[j]
-      if(!el.hasOwnProperty(attr)) continue
-      if(!Array.isArray(el[attr])) {
-        keyResult.push(el[attr])
+    for(var i = 0,len = keys.length; i < len; ++i) {
+      key = keys[i]
+      if(next.hasOwnProperty(key)) {
+        next[key] = [].concat(curr[key]).concat(next[key])
       } else {
-        keyResult = keyResult.concat(el[attr])
-        convert = true
+        next[key] = curr[key]
       }
     }
 
-    if(keyResult.length === 1 && !convert) keyResult = keyResult[0]
-    result[attr] = keyResult
+    return next
   }
-
-  return result
 }
