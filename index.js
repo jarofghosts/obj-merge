@@ -17,8 +17,7 @@ function merge() {
       key = keys[i]
       if(next.hasOwnProperty(key)) {
         next[key] = [].concat(curr[key]).concat(next[key])
-      }
-      else {
+      } else {
         next[key] = curr[key]
       }
     }
